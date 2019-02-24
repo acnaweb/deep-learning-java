@@ -23,18 +23,64 @@ public class Perceptron {
 		this.n = n;
 	}
 
-	/**********************************************************************/
-	private void initWeights() {
-		Random r = new Random(42);
-		this.w = new double[n + 1];
+	/**
+	 * @param dataset
+	 * @param y
+	 * @param learningTax
+	 * @param epochs
+	 */
+	public void training(double dataset[][], double y[], float learningTax, int epochs) {
 
-		for (int i = 0; i <= n; i++) {
-			this.w[i] = r.nextDouble();
+		int datasetSize = dataset.length;
+
+		for (int currentEpoch = 1; currentEpoch <= epochs; currentEpoch++) {
+
+			for (int i = 0; i < datasetSize; i++) {
+				double x[] = dataset[i];
+
+				double yCalculated = calculate(x);
+				double yExpected = y[i];
+				double error = this.calculateError(yCalculated, yExpected);
+
+				// System.out.println("yCalculated=" + yCalculated + "\tyExpected=" + yExpected
+				// + "\terror=" + error);
+				this.updateWeights(yExpected, error, learningTax);
+			}
 		}
 	}
 
-	/**********************************************************************/
-	public int calculate(int x[]) {
+	/**
+	 * @param yExpected
+	 * @param error
+	 * @param learningTax
+	 */
+	private void updateWeights(double yExpected, double error, float learningTax) {
+		// peso - (entrada * erro * taxa de aprendizagem)
+
+		for (int i = 0; i < w.length; i++) {
+			if (i == 0) {// bias
+				w[i] = w[i] - error * learningTax;
+			} else {
+				w[i] = w[i] - yExpected * error * learningTax;
+			}
+		}
+
+	}
+
+	/**
+	 * @param yCalculated
+	 * @param yExpected
+	 * @return
+	 */
+	private double calculateError(double yCalculated, double yExpected) {
+		return yCalculated - yExpected;
+	}
+
+	/**
+	 * @param x
+	 * @return
+	 */
+	public double calculate(double x[]) {
 		if (x.length != n)
 			throw new IllegalArgumentException("x.length != n");
 
@@ -48,7 +94,35 @@ public class Perceptron {
 		return this.stepFunction(h);
 	}
 
-	/**********************************************************************/
+	/**
+	 * 
+	 */
+	private void initWeights() {
+		Random r = new Random();
+		this.w = new double[n + 1];
+
+		for (int i = 0; i <= n; i++) {
+			this.w[i] = r.nextDouble();
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void printWeights() {
+		String msg = "";
+
+		for (int i = 0; i <= n; i++) {
+			msg += "w[" + i + "]=" + this.w[i] + "\t";
+		}
+
+		System.out.println(msg);
+	}
+
+	/**
+	 * @param h
+	 * @return
+	 */
 	private int stepFunction(double h) {
 		int result;
 		if (h < 0)
@@ -58,7 +132,4 @@ public class Perceptron {
 		return result;
 	}
 
-
-
-	
 }
