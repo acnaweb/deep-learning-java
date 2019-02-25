@@ -11,7 +11,7 @@ public class RunPerceptron {
 
 	public void runMain() {
 		int n = 2;
-		float learningTax = (float) 0.1;
+		float learningTax = (float) 0.01;
 		int epochs = 1000;
 		double[][] dataset = new double[4][2];
 		dataset[0] = new double[] { 1, 1 };
@@ -21,14 +21,14 @@ public class RunPerceptron {
 
 		// and
 		System.out.println("Training And");
-		Perceptron and = new Perceptron(n);
+		Perceptron2 and = new Perceptron2(n);
 		double[] yAnd = { 1, 0, 0, 0 };
 		and.training(dataset, yAnd, learningTax, epochs);
 		and.printWeights();
 
 		// or
 		System.out.println("Training Or");
-		Perceptron or = new Perceptron(n);
+		Perceptron2 or = new Perceptron2(n);
 		double[] yOr = { 1, 1, 1, 0 };
 		or.training(dataset, yOr, learningTax, epochs);
 		or.printWeights();
@@ -40,7 +40,7 @@ public class RunPerceptron {
 		datasetOr[0] = new double[] { 1 };
 		datasetOr[1] = new double[] { 0 };
 
-		Perceptron not = new Perceptron(n);
+		Perceptron2 not = new Perceptron2(n);
 		double[] yNot = { 0, 1 };
 		not.training(datasetOr, yNot, learningTax, epochs);
 		not.printWeights();
@@ -80,21 +80,21 @@ public class RunPerceptron {
 		// bias, w1, w2
 		w = new double[] { -3, 2, 2 };
 		n = 2;
-		Perceptron and = new Perceptron(w, n);
+		Perceptron2 and = new Perceptron2(w, n);
 
 		/**************************************/
 		// neuronio OR
 		// bias, w1, w2
 		w = new double[] { -3, 4, 4 };
 		n = 2;
-		Perceptron or = new Perceptron(w, n);
+		Perceptron2 or = new Perceptron2(w, n);
 
 		/**************************************/
 		// neuronio NOT
 		// bias, w1
 		w = new double[] { 1, -2 };
 		n = 1;
-		Perceptron not = new Perceptron(w, n);
+		Perceptron2 not = new Perceptron2(w, n);
 
 		/**************************************/
 		// dataset
