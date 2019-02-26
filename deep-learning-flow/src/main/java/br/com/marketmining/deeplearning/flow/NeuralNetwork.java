@@ -7,52 +7,34 @@ import java.util.Map;
 import java.util.Set;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 
+import br.com.marketmining.deeplearning.flow.app.NetLinear;
+
+/**
+ * @author ac
+ *
+ */
 public class NeuralNetwork {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		new NeuralNetwork().somaDois();
-	}
-
-	public void somaDois() {
-
-		// input
-		Input xInput = new Input("x");
-		Input yInput = new Input("y");
-
-		// intermediate (operations)
-		Add f = new Add(xInput, yInput);
-
-		// output
-
-		// values
-		double[] x = { 10 };
-		double[] y = { 40 };
-
-		INDArray xValue = Nd4j.create(x);
-		INDArray yValue = Nd4j.create(y);
-
-		// values for inputs
-		Map<Node, INDArray> feed = new HashMap<Node, INDArray>();
-		feed.put(xInput, xValue);
-		feed.put(yInput, yValue);
-
-		// sort nodes
-		ArrayList<Node> sortedNodes = sortNodes(feed);
-
-		System.out.println(sortedNodes);
+		// new NetSomaDois().execute();
 		
-		INDArray result = callForward(f, sortedNodes);
-
-		System.out.println(result);
-
+		new NetLinear().execute();
 	}
 
-	// Método que faz a passada para frente
-	public static INDArray callForward(Node output, ArrayList<Node> sortedNodes) {
+	/**
+	 * Método que faz a passada para frente
+	 * 
+	 * @param output
+	 * @param graph
+	 * @return
+	 */
+	public static INDArray callForward(Node output, ArrayList<Node> graph) {
 		// Para cada nó dentre os nós já ordenados
-		for (Node n : sortedNodes) {
+		for (Node n : graph) {
 			// Executa o método foward do nó
 			n.forward();
 		}
@@ -60,8 +42,13 @@ public class NeuralNetwork {
 		return output.value;
 	}
 
-	// Método que ordena os nós usando o algoritmo de Kahn
-	// https://en.wikipedia.org/wiki/Topological_sorting#Kahn.27s_algorithm
+	/**
+	 * Método que ordena os nós usando o algoritmo de Kahn
+	 * https://en.wikipedia.org/wiki/Topological_sorting#Kahn.27s_algorithm
+	 * 
+	 * @param feed
+	 * @return
+	 */
 	public static ArrayList<Node> sortNodes(Map<Node, INDArray> feed) {
 		Set<Node> nos_Input = feed.keySet();
 		ArrayList<Node> nos = new ArrayList<Node>(nos_Input);
