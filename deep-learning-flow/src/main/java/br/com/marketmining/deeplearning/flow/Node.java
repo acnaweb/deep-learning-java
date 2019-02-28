@@ -1,15 +1,26 @@
 package br.com.marketmining.deeplearning.flow;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
+/**
+ * @author ac
+ *
+ */
+/**
+ * @author ac
+ *
+ */
 public abstract class Node {
 	protected List<Node> inputs;
 	protected List<Node> outputs;
 	protected INDArray value;
+	protected Map<Node, INDArray> gradients;
 	protected String name;
 
 	// input node
@@ -27,7 +38,9 @@ public abstract class Node {
 		// init zero value
 		this.value = Nd4j.zeros(1);
 
+		// init
 		this.outputs = new ArrayList<Node>();
+		this.gradients = new HashMap<Node, INDArray>();
 
 		// register self for updates
 		for (Node node : inputs) {
@@ -35,7 +48,10 @@ public abstract class Node {
 		}
 	}
 
+	
 	public abstract void forward();
+	
+	public abstract void backward();
 
 	@Override
 	public String toString() {

@@ -23,4 +23,10 @@ public class Mse extends Node {
 
 	}
 
+	@Override
+	public void backward() {
+		
+		
+	}
+
 }

@@ -24,4 +24,10 @@ public class Linear extends Node {
 
 	}
 
+	@Override
+	public void backward() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

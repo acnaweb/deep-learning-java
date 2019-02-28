@@ -19,4 +19,10 @@ public class Add extends Node {
 		this.value = xValue.add(yValue);
 	}
 
+	@Override
+	public void backward() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

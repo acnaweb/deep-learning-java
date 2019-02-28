@@ -10,4 +10,10 @@ public class Input extends Node {
 	@Override
 	public void forward() {}
 
+	@Override
+	public void backward() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

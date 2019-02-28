@@ -24,4 +24,10 @@ public class Sigmoide extends Node {
 		this.value = this.sigmoide(hValue);
 	}
 
+	@Override
+	public void backward() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
