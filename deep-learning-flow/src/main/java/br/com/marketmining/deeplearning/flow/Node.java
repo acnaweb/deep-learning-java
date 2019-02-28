@@ -20,6 +20,7 @@ public abstract class Node {
 	protected List<Node> inputs;
 	protected List<Node> outputs;
 	protected INDArray value;
+
 	protected Map<Node, INDArray> gradients;
 	protected String name;
 
@@ -28,6 +29,7 @@ public abstract class Node {
 		this.name = name;
 		this.value = Nd4j.zeros(1);
 		this.outputs = new ArrayList<Node>();
+		this.gradients = new HashMap<Node, INDArray>();
 	}
 
 	// intermediate node
@@ -42,15 +44,26 @@ public abstract class Node {
 		this.outputs = new ArrayList<Node>();
 		this.gradients = new HashMap<Node, INDArray>();
 
-		// register self for updates
+		this.connectSelfOnInputs();
+		this.initGradientsForInputs();
+	}
+
+	private void connectSelfOnInputs() {
+		// connect self for updates
 		for (Node node : inputs) {
 			node.outputs.add(this);
 		}
 	}
 
-	
+	private void initGradientsForInputs() {
+		/// initializing gradientes for inputs
+		for (Node input : inputs) {
+			this.gradients.put(input, Nd4j.zeros(input.value.shape()));
+		}
+	}
+
 	public abstract void forward();
-	
+
 	public abstract void backward();
 
 	@Override
