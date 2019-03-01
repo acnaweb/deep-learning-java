@@ -7,7 +7,7 @@ import org.nd4j.linalg.factory.Nd4j;
 
 public class Mse extends Node {
 	private final int NODE_INPUT_CALCULATED = 0;
-	private final int NODE_INPUT_EXPECTED = 1;
+	private final int NODE_INPUT_Y = 1;
 
 	// y - ŷ
 	private INDArray diff;
@@ -15,15 +15,15 @@ public class Mse extends Node {
 	// instantes quantity
 	private long n;
 
-	public Mse(Node outuputCalculated, Node outputExpected) {
-		super("MSE", Arrays.asList(outuputCalculated, outputExpected));
+	public Mse(String name, Node outputCalculated, Node outputY) {
+		super(name, Arrays.asList(outputCalculated, outputY));
 	}
 
 	@Override
 	public void forward() {
 		INDArray outputCalculatedValue = this.inputs.get(NODE_INPUT_CALCULATED).value;
-		INDArray outputExpectedValue = this.inputs.get(NODE_INPUT_EXPECTED).value;
-		INDArray diff = outputCalculatedValue.sub(outputExpectedValue);
+		INDArray outputYValue = this.inputs.get(NODE_INPUT_Y).value;
+		this.diff = outputCalculatedValue.sub(outputYValue);
 		this.n = outputCalculatedValue.slices();
 
 		this.value = Nd4j.mean(diff.mul(diff));
@@ -33,7 +33,7 @@ public class Mse extends Node {
 	@Override
 	public void backward() {
 		this.gradients.put(this.inputs.get(NODE_INPUT_CALCULATED), this.diff.mul(2 / this.n));
-		this.gradients.put(this.inputs.get(NODE_INPUT_EXPECTED), this.diff.mul(-2 / this.n));
+		this.gradients.put(this.inputs.get(NODE_INPUT_Y), this.diff.mul(-2 / this.n));
 
 	}
 

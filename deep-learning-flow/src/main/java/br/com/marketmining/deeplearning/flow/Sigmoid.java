@@ -7,11 +7,11 @@ import java.util.Arrays;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
-public class Sigmoide extends Node {
+public class Sigmoid extends Node {
 	private final int NODE_H = 0;
 
-	public Sigmoide(Node h) {
-		super("Sigmoide", Arrays.asList(h));
+	public Sigmoid(String name, Node h) {
+		super(name, Arrays.asList(h));
 	}
 
 	private INDArray sigmoide(INDArray value) {
@@ -27,6 +27,10 @@ public class Sigmoide extends Node {
 
 	@Override
 	public void backward() {
+		/// initializing gradientes for inputs
+		for (Node input : inputs) {
+			this.gradients.put(input, Nd4j.zeros(input.value.shape()));
+		}
 
 		// calculate for ouputs
 		for (Node output : this.outputs) {
@@ -41,7 +45,10 @@ public class Sigmoide extends Node {
 			INDArray sigmoidValue = this.sigmoide(hValue);
 
 			// deriving sigmoid
-			INDArray vetorOnes = Nd4j.ones(hValue.slices());
+			INDArray vetorOnes = Nd4j.ones(hValue.shape());
+
+			vetorOnes.sub(sigmoidValue);
+
 			INDArray derivedSigmoid = sigmoidValue.mul(vetorOnes.sub(sigmoidValue));
 
 			// gradients x derived sigmoid

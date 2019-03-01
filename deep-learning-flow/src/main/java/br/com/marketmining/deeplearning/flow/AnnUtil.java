@@ -8,21 +8,35 @@ import java.util.Set;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 
-import br.com.marketmining.deeplearning.flow.app.NetLinear;
+public class AnnUtil {
 
-/**
- * @author ac
- *
- */
-public class NeuralNetwork {
+	public static void gradientUpdate(Node[] nodesToTraining, double learningRate) {
+		// Itera por cada nó treinável
+		for (Node node : nodesToTraining) {
+			INDArray currentGradient = node.gradients.get(node);
+			
+			// Subtrai do nó treinável seu gradiente multiplicado pela taxa de aprendizagem
+			node.value.subi(currentGradient.mul(learningRate));
+		}
+	}
 
 	/**
-	 * @param args
+	 * Método que faz a passada para frente e para trás
+	 * 
+	 * @param graph
 	 */
-	public static void main(String[] args) {
-		// new NetSomaDois().execute();
-		
-		new NetLinear().execute();
+	public static void callForwardBackward(ArrayList<Node> graph) {
+		// Para cada nó dentre os nós já ordenados
+		for (Node n : graph) {
+			// Executa o método foward do nó
+			n.forward();
+		}
+
+		for (int i = graph.size() - 1; i >= 0; i--) {
+			Node n = graph.get(i);
+			n.backward();
+		}
+
 	}
 
 	/**

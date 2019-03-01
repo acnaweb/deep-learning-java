@@ -1,4 +1,4 @@
-package br.com.marketmining.deeplearning.flow.app;
+package br.com.marketmining.deeplearning.forward;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import br.com.marketmining.deeplearning.flow.Add;
 import br.com.marketmining.deeplearning.flow.Input;
-import br.com.marketmining.deeplearning.flow.NeuralNetwork;
+import br.com.marketmining.deeplearning.flow.AnnUtil;
 import br.com.marketmining.deeplearning.flow.Node;
 
 public class NetSomaDois {
@@ -32,17 +32,17 @@ public class NetSomaDois {
 		INDArray xValue = Nd4j.create(x);
 		INDArray yValue = Nd4j.create(y);
 
-		// values for inputs
+		// binding values to inputs
 		Map<Node, INDArray> feed = new HashMap<Node, INDArray>();
 		feed.put(xInput, xValue);
 		feed.put(yInput, yValue);
 
 		// sort nodes
-		ArrayList<Node> graph = NeuralNetwork.sortNodes(feed);
+		ArrayList<Node> graph = AnnUtil.sortNodes(feed);
 
 		System.out.println(graph);
 
-		INDArray result = NeuralNetwork.callForward(f, graph);
+		INDArray result = AnnUtil.callForward(f, graph);
 
 		System.out.println(result);
 
