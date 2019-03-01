@@ -61,8 +61,8 @@
 	</build>
 	<modules>
 		<module>deep-learning-perceptron</module>
-		<module>deep-learning-tensorflow</module>
 		<module>deep-learning-flow</module>
+		<module>deep-learning-dl4j</module>
 	</modules>
 </project>
 
