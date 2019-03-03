@@ -1,4 +1,4 @@
-package br.com.marketmining.deeplearning.backforward;
+package br.com.marketmining.dsaflow.backward;
 
 public class Dsa {
 

@@ -1,4 +1,4 @@
-package br.com.marketmining.deeplearning.app;
+package br.com.marketmining.dsaflow.app;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;

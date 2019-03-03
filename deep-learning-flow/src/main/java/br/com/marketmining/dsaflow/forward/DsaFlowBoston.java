@@ -1,4 +1,4 @@
-package br.com.marketmining.deeplearning.forward;
+package br.com.marketmining.dsaflow.forward;
 
 import static org.nd4j.linalg.ops.transforms.Transforms.normalizeZeroMeanAndUnitVariance;
 
@@ -9,13 +9,13 @@ import java.util.Map;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
-import br.com.marketmining.deeplearning.flow.AnnUtil;
-import br.com.marketmining.deeplearning.flow.DatasetUtil;
-import br.com.marketmining.deeplearning.flow.Input;
-import br.com.marketmining.deeplearning.flow.Linear;
-import br.com.marketmining.deeplearning.flow.Mse;
-import br.com.marketmining.deeplearning.flow.Node;
-import br.com.marketmining.deeplearning.flow.Sigmoid;
+import br.com.marketmining.dsaflow.AnnUtil;
+import br.com.marketmining.dsaflow.DatasetUtil;
+import br.com.marketmining.dsaflow.Input;
+import br.com.marketmining.dsaflow.Linear;
+import br.com.marketmining.dsaflow.Mse;
+import br.com.marketmining.dsaflow.Node;
+import br.com.marketmining.dsaflow.Sigmoid;
 
 public class DsaFlowBoston {
 

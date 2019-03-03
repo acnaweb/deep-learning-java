@@ -1,4 +1,4 @@
-package br.com.marketmining.deeplearning.flow;
+package br.com.marketmining.dsaflow;
 
 import static org.nd4j.linalg.ops.transforms.Transforms.sigmoid;
 

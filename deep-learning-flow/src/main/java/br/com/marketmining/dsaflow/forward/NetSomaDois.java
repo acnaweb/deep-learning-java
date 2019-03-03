@@ -1,4 +1,4 @@
-package br.com.marketmining.deeplearning.forward;
+package br.com.marketmining.dsaflow.forward;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,10 +7,10 @@ import java.util.Map;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
-import br.com.marketmining.deeplearning.flow.Add;
-import br.com.marketmining.deeplearning.flow.Input;
-import br.com.marketmining.deeplearning.flow.AnnUtil;
-import br.com.marketmining.deeplearning.flow.Node;
+import br.com.marketmining.dsaflow.Add;
+import br.com.marketmining.dsaflow.AnnUtil;
+import br.com.marketmining.dsaflow.Input;
+import br.com.marketmining.dsaflow.Node;
 
 public class NetSomaDois {
 

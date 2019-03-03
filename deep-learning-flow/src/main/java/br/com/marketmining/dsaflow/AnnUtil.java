@@ -1,4 +1,4 @@
-package br.com.marketmining.deeplearning.flow;
+package br.com.marketmining.dsaflow;
 
 import java.util.ArrayList;
 import java.util.HashMap;

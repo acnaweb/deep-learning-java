@@ -1,7 +1,7 @@
-package br.com.marketmining.deeplearning.app;
+package br.com.marketmining.dsaflow.app;
 
-import br.com.marketmining.deeplearning.forward.DsaFlowBoston;
-import br.com.marketmining.deeplearning.forward.DsaFlowStudy;
+import br.com.marketmining.dsaflow.forward.DsaFlowBoston;
+import br.com.marketmining.dsaflow.forward.DsaFlowStudy;
 
 /**
  * @author ac

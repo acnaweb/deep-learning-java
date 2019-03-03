@@ -1,4 +1,4 @@
-package br.com.marketmining.deeplearning.perceptron;
+package br.com.marketmining.perceptron;
 
 public class Perceptron1 {
 	private static final int BIAS = 1;
